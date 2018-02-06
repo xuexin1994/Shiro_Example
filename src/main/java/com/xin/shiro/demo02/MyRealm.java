@@ -24,7 +24,6 @@ public class MyRealm implements Realm {
         if (!(token instanceof UsernamePasswordToken)) {
             throw new UnsupportedTokenException();
         }
-        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
         String username = (String) token.getPrincipal();
         char[] passwordArr = (char[]) token.getCredentials();
         String password = new String(passwordArr);
@@ -34,6 +33,6 @@ public class MyRealm implements Realm {
         if (!"123".equals(password)) {
             throw new IncorrectCredentialsException();
         }
-        return new SimpleAuthenticationInfo(username,password,getName());
+        return new SimpleAuthenticationInfo(username, password, getName());
     }
 }
