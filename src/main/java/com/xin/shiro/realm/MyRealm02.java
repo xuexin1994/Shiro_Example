@@ -1,4 +1,4 @@
-package com.xin.shiro.demo02;
+package com.xin.shiro.realm;
 
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.pam.UnsupportedTokenException;
@@ -8,7 +8,7 @@ import org.apache.shiro.realm.Realm;
  * @author xuexin
  * @date 2018/2/6
  */
-public class MyRealm implements Realm {
+public class MyRealm02 implements Realm {
     @Override
     public String getName() {
         return this.getClass().getName();
@@ -27,7 +27,7 @@ public class MyRealm implements Realm {
         String username = (String) token.getPrincipal();
         char[] passwordArr = (char[]) token.getCredentials();
         String password = new String(passwordArr);
-        if (!"zs".equals(username)) {
+        if (!"ls".equals(username)) {
             throw new UnknownAccountException();
         }
         if (!"123".equals(password)) {
