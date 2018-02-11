@@ -2,6 +2,7 @@ package com.xin.shiro.demo07;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.xin.shiro.resolver.MyPermissionResolver;
+import com.xin.shiro.resolver.MyRolePermissionResolver;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -36,10 +37,11 @@ public class Demo07_ConfigByJava {
          *  @see AuthorizingSecurityManager#AuthorizingSecurityManager()
          */
         DefaultSecurityManager securityManager = new DefaultSecurityManager();
-        //设置权限转换器
+        //设置权限转换器及角色权限转换器
         Authorizer authorizer = securityManager.getAuthorizer();
         if (authorizer instanceof ModularRealmAuthorizer) {
             ((ModularRealmAuthorizer) authorizer).setPermissionResolver(new MyPermissionResolver());
+            ((ModularRealmAuthorizer) authorizer).setRolePermissionResolver(new MyRolePermissionResolver());
         }
 
         //--------------设置数据库连接池--------------
@@ -77,7 +79,7 @@ public class Demo07_ConfigByJava {
         try {
             subject.login(token);
         } catch (AuthenticationException e) {
-            System.out.println("登录失败");
+            System.out.println("登录失败,失败原因:" + e);
         }
         String role1 = "role1";
         String permission1 = "my.permission1.read";
