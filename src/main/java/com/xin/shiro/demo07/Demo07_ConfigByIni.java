@@ -1,41 +1,32 @@
-package com.xin.shiro.demo06;
+package com.xin.shiro.demo07;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
 
-import java.util.Scanner;
-
 /**
  * @author xuexin
- * @date 2018/2/9
+ * @date 2018/2/11
  */
-public class Demo06_AuthorizingRealm {
+public class Demo07_ConfigByIni {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("请输入账号");
-        String username = sc.nextLine();
-        System.out.println("请输入密码");
-        String password = sc.nextLine();
         //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
-        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:demo06/authorizer.ini");
+        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:demo07/config.ini");
         //2、得到SecurityManager实例 并绑定给SecurityUtils，这是全局设置，只需要设置一次；
         SecurityManager securityManager = factory.getInstance();
+
         SecurityUtils.setSecurityManager(securityManager);
-        //3、得到Subject及创建用户名/密码身份验证Token（即用户身份/凭证）
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        AuthenticationToken token = new UsernamePasswordToken("zs", "123");
         try {
-            //4、登录，即身份验证
-            //登录前不具备角色
             subject.login(token);
         } catch (AuthenticationException e) {
-            //5、身份验证失败
-            System.out.println("登录失败:" + e);
+            System.out.println("登录失败");
         }
         String role1 = "role1";
         String permission1 = "my.permission1.read";
@@ -47,8 +38,6 @@ public class Demo06_AuthorizingRealm {
         System.out.println(subject.getPrincipal() + "是否拥有权限" + permission2 + ":" + subject.isPermitted(permission2));
         System.out.println(subject.getPrincipal() + "是否拥有权限" + permission3 + ":" + subject.isPermitted(permission3));
         System.out.println(subject.getPrincipal() + "是否拥有权限" + permission4 + ":" + subject.isPermitted(permission4));
-        //6、退出
         subject.logout();
     }
-
 }
