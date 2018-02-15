@@ -1,4 +1,4 @@
-package com.xin.shiro.demo07;
+package com.xin.shiro.part03_config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.xin.shiro.resolver.MyPermissionResolver;

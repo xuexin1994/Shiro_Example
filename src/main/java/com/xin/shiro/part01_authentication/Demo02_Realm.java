@@ -1,4 +1,4 @@
-package com.xin.shiro.demo02;
+package com.xin.shiro.part01_authentication;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -22,7 +22,7 @@ public class Demo02_Realm {
         System.out.println("请输入密码");
         String password = sc.nextLine();
         //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
-        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:demo02/realm.ini");
+        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:part01_authentication/realm.ini");
         //2、得到SecurityManager实例 并绑定给SecurityUtils，这是全局设置，只需要设置一次；
         SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);

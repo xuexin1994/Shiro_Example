@@ -1,4 +1,4 @@
-package com.xin.shiro.demo04;
+package com.xin.shiro.part01_authentication;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -38,7 +38,7 @@ public class Demo04_AuthenticationStrategy {
         String username = defaultUsername;
         String password = defaultPassword;
         //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
-        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:demo04/firstSuccessfulStrategy.ini");
+        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:part01_authentication/firstSuccessfulStrategy.ini");
         //2、得到SecurityManager实例 并绑定给SecurityUtils，这是全局设置，只需要设置一次；
         SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
@@ -68,7 +68,7 @@ public class Demo04_AuthenticationStrategy {
         String username = defaultUsername;
         String password = defaultPassword;
         //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
-        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:demo04/atLeastOneSuccessfulStrategy.ini");
+        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:part01_authentication/atLeastOneSuccessfulStrategy.ini");
         //2、得到SecurityManager实例 并绑定给SecurityUtils，这是全局设置，只需要设置一次；
         SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
@@ -92,13 +92,14 @@ public class Demo04_AuthenticationStrategy {
 
     /**
      * AllSuccessfulStrategy：所有Realm验证成功才算成功，且返回所有Realm身份验证成功的认证信息，如果有一个失败就失败了。
+     * 配置文件中注释掉realm02则登录成功
      */
     @Test
     public void test_AllSuccessfulStrategy() {
         String username = defaultUsername;
         String password = defaultPassword;
         //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
-        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:demo04/allSuccessfulStrategy.ini");
+        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:part01_authentication/allSuccessfulStrategy.ini");
         //2、得到SecurityManager实例 并绑定给SecurityUtils，这是全局设置，只需要设置一次；
         SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);

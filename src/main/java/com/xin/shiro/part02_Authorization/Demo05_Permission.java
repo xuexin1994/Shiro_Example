@@ -1,4 +1,4 @@
-package com.xin.shiro.demo05;
+package com.xin.shiro.part02_Authorization;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -25,7 +25,7 @@ public class Demo05_Permission {
     @Before
     public void prepare() {
         //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
-        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:demo05/permission.ini");
+        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:part02_Authorization/permission.ini");
         //2、得到SecurityManager实例 并绑定给SecurityUtils，这是全局设置，只需要设置一次；
         SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
